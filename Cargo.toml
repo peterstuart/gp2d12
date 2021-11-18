@@ -1,0 +1,19 @@
+[package]
+name = "gp2d12"
+version = "0.1.0"
+authors = ["Peter Stuart <peter@peterstuart.org>"]
+description = "Driver for the GP2D12 infrared distance sensor"
+readme = "README.md"
+repository = "https://github.com/peterstuart/gp2d12/"
+keywords = ["embedded-hal", "gp2d12"]
+categories = ["embedded"]
+license = "MIT"
+edition = "2021"
+
+[dependencies]
+adc-interpolator = "0.2.0"
+embedded-hal = { version = "0.2.6", features = ["unproven"] }
+nb = "1.0.0"
+
+[dev-dependencies]
+embedded-hal-mock = "0.8.0"
