@@ -16,7 +16,8 @@
 //! # let mut adc = Mock::new(&expectations);
 //! # let pin = MockChan0 {};
 //!
-//! let mut gp2d12 = Gp2d12::new(pin);
+//! // 3300 mV max voltage on the ADC, 12-bit precision
+//! let mut gp2d12 = Gp2d12::new(pin, 3300, 12);
 //!
 //! // measuring 40 cm
 //! assert_eq!(gp2d12.distance(&mut adc), Ok(Some(40)));

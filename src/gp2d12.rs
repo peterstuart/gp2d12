@@ -24,7 +24,8 @@ type Error<Adc, ADC, Word, Pin> = nb::Error<<Adc as OneShot<ADC, Word, Pin>>::Er
 /// # let mut adc = Mock::new(&expectations);
 /// # let pin = MockChan0 {};
 ///
-/// let mut gp2d12 = Gp2d12::new(pin);
+/// // 3300 mV max voltage on the ADC, 12-bit precision
+/// let mut gp2d12 = Gp2d12::new(pin, 3300, 12);
 ///
 /// // measuring 40 cm
 /// assert_eq!(gp2d12.distance(&mut adc), Ok(Some(40)));
@@ -33,15 +34,17 @@ impl<Pin, Word> Gp2d12<Pin, Word> {
     /// Returns a `Gp2d12`.
     ///
     /// - `pin`: A pin configured as an analog input. The ADC associated with the pin must be used when calling [`distance`][Gp2d12::distance].
-    pub fn new<ADC>(pin: Pin) -> Self
+    /// - `max_voltage`: The voltage corresponding to the largest value possible for the ADC (mV)
+    /// - `precision`: The precision of the ADC in bits (eg. for 10-bit precision, use `10`)
+    pub fn new<ADC>(pin: Pin, max_voltage: u32, precision: u32) -> Self
     where
         Word: Copy + PartialOrd + TryFrom<u32>,
         <Word as TryFrom<u32>>::Error: fmt::Debug,
         Pin: Channel<ADC>,
     {
         let config = Config {
-            max_voltage: 3300,
-            precision: 12,
+            max_voltage,
+            precision,
             voltage_to_values: [
                 (420, 80),
                 (450, 75),
