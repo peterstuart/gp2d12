@@ -1,4 +1,10 @@
-# gp2d12
+# gp2d12 &emsp; [![Build Status]][actions] [![Latest Version]][crates.io] [![Docs Badge]][docs] 
+[Build Status]: https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fpeterstuart%2gp2d12%2Fbadge&label=build&logo=none
+[actions]: https://actions-badge.atrox.dev/peterstuart/gp2d12/goto
+[Latest Version]: https://img.shields.io/crates/v/gp2d12.svg
+[crates.io]: https://crates.io/crates/gp2d12
+[Docs Badge]: https://docs.rs/gp2d12/badge.svg
+[docs]: https://docs.rs/gp2d12
 
 An embedded-hal driver for the GP2D12 infrared distance sensor.
 
@@ -16,5 +22,3 @@ let mut gp2d12 = Gp2d12::new(pin, 3300, 12);
 // measuring 40 cm
 assert_eq!(gp2d12.distance(&mut adc), Ok(Some(40)));
 ```
-
-License: MIT
