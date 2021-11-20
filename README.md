@@ -1,6 +1,6 @@
 # gp2d12 &emsp; [![Build Status]][actions] [![Latest Version]][crates.io] [![Docs Badge]][docs] 
-[Build Status]: https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fpeterstuart%2gp2d12%2Fbadge&label=build&logo=none
-[actions]: https://actions-badge.atrox.dev/peterstuart/gp2d12/goto
+[Build Status]: https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fpeterstuart%2Fgp2d12%2Fbadge%3Fref%3Dmain&style=flat
+[actions]: https://actions-badge.atrox.dev/peterstuart/gp2d12/goto?ref=main
 [Latest Version]: https://img.shields.io/crates/v/gp2d12.svg
 [crates.io]: https://crates.io/crates/gp2d12
 [Docs Badge]: https://docs.rs/gp2d12/badge.svg
