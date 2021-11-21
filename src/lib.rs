@@ -1,3 +1,5 @@
+#![no_std]
+
 //! An embedded-hal driver for the GP2D12 infrared distance sensor.
 //!
 //! Distance calibration is based on the values in the
