@@ -1,6 +1,6 @@
 [package]
 name = "gp2d12"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["Peter Stuart <peter@peterstuart.org>"]
 description = "Driver for the GP2D12 infrared distance sensor"
 readme = "README.md"
