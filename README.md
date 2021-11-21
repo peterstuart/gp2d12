@@ -22,3 +22,7 @@ let mut gp2d12 = Gp2d12::new(pin, 3300, 12);
 // measuring 40 cm
 assert_eq!(gp2d12.distance(&mut adc), Ok(Some(40)));
 ```
+
+See the [STM32F3Discovery
+example](https://github.com/peterstuart/gp2d12/blob/main/examples/stm32f3discovery/README.md)
+for a complete example.
