@@ -1,11 +1,10 @@
 use adc_interpolator::{AdcInterpolator, Config};
-use core::{convert::TryFrom, fmt};
 use embedded_hal::adc::{Channel, OneShot};
 
 /// Driver for the GP2D12 infrared distance sensor.
 #[derive(Debug)]
-pub struct Gp2d12<Pin, Word> {
-    interpolator: AdcInterpolator<Pin, Word, 18>,
+pub struct Gp2d12<Pin> {
+    interpolator: AdcInterpolator<Pin, u32, 18>,
 }
 
 type Error<Adc, ADC, Word, Pin> = nb::Error<<Adc as OneShot<ADC, Word, Pin>>::Error>;
@@ -20,7 +19,7 @@ type Error<Adc, ADC, Word, Pin> = nb::Error<<Adc as OneShot<ADC, Word, Pin>>::Er
 /// #     MockError,
 /// # };
 /// #
-/// # let expectations: [Transaction<u16>; 1] = [Transaction::read(0, 950)];
+/// # let expectations: [Transaction<u32>; 1] = [Transaction::read(0, 950)];
 /// # let mut adc = Mock::new(&expectations);
 /// # let pin = MockChan0 {};
 ///
@@ -30,7 +29,7 @@ type Error<Adc, ADC, Word, Pin> = nb::Error<<Adc as OneShot<ADC, Word, Pin>>::Er
 /// // measuring 40 cm
 /// assert_eq!(gp2d12.distance(&mut adc), Ok(Some(40)));
 /// ```
-impl<Pin, Word> Gp2d12<Pin, Word> {
+impl<Pin> Gp2d12<Pin> {
     /// Returns a `Gp2d12`.
     ///
     /// - `pin`: A pin configured as an analog input. The ADC associated with the pin must be used when calling [`distance`][Gp2d12::distance].
@@ -38,8 +37,6 @@ impl<Pin, Word> Gp2d12<Pin, Word> {
     /// - `precision`: The precision of the ADC in bits (eg. for 10-bit precision, use `10`)
     pub fn new<ADC>(pin: Pin, max_voltage: u32, precision: u32) -> Self
     where
-        Word: Copy + PartialOrd + TryFrom<u32>,
-        <Word as TryFrom<u32>>::Error: fmt::Debug,
         Pin: Channel<ADC>,
     {
         let config = Config {
@@ -84,11 +81,10 @@ impl<Pin, Word> Gp2d12<Pin, Word> {
     pub fn distance<Adc, ADC>(
         &mut self,
         adc: &mut Adc,
-    ) -> Result<Option<u32>, Error<Adc, ADC, Word, Pin>>
+    ) -> Result<Option<u32>, Error<Adc, ADC, u32, Pin>>
     where
-        Word: Copy + Into<u32> + PartialEq + PartialOrd,
         Pin: Channel<ADC>,
-        Adc: OneShot<ADC, Word, Pin>,
+        Adc: OneShot<ADC, u32, Pin>,
     {
         self.interpolator.read(adc)
     }
