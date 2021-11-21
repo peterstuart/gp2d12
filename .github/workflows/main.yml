@@ -14,6 +14,7 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
+          target: thumbv7em-none-eabihf
 
       - name: rustfmt
         run: cargo fmt -- --check
@@ -29,3 +30,9 @@ jobs:
           cargo install cargo-readme
           cargo readme > README.md
           git diff --exit-code
+
+      - name: (examples) rustfmt
+        run: cd examples/stm32f3discovery && cargo fmt -- --check
+
+      - name: (examples) clippy
+        run: cd examples/stm32f3discovery && cargo clippy -- -D warnings
