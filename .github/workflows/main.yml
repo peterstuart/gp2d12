@@ -18,6 +18,7 @@ jobs:
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
             target/
+            examples/stm32f3discovery/target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
     
       - name: Install stable toolchain
